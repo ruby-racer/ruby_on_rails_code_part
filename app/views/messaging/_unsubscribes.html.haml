@@ -1,0 +1,18 @@
+.product-table-sec
+  %table#unsubscribes-table.table.table-hover
+    %thead
+      %tr
+        %th
+          = t('views.messaging.tables.headings.marketplace')
+        %th
+          = t('views.messaging.tables.headings.email')
+        %th
+          = t('views.messaging.tables.headings.last_updated')
+        %th
+      %tbody
+        %tr
+          - unsubscribes.group_by(&:email).each do |email, unsubscribes|
+            - unsubscribe = unsubscribes.first
+            = render partial: 'messaging/unsubscribes_row', locals: { unsubscribe: unsubscribe }
+
+

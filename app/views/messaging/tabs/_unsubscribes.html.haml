@@ -1,0 +1,35 @@
+- limits = %w(10 25 50 100)
+#tab4.tab-pane
+  .row
+    .test-top-sec
+      .col-xs-7.col-sm-7.col-md-7
+        .col-xs-3.col-sm-3.col-md-3
+          .test-top-left
+            %ul.clearfix
+              %li
+                %a#add-unsubscribe-btn{ href: new_unsubscribe_path, data: { remote: true } }
+                  = t('views.messaging.buttons.add_email')
+      .col-xs-5.col-sm-5.col-md-5
+        .test-top-right
+          %ul
+            %li
+              %a{ href: 'javascript:;' } show
+            - limits.each do |limit|
+              %li
+                %a.filter-limit { href: "/messaging?limit=#{limit}", data: { remote: true } } limit
+
+            %li
+              %a{ data: { toggle: 'modal' }, href: '#unsubscribes-help-modal' }
+                %span.help
+                  %i.fa.fa-question-circle
+  .row
+    .col-xs-12.col-sm-12.col-md-12
+      = render partial: 'unsubscribes', locals: { unsubscribes: @unsubscribes }
+
+      .product-bot-sec
+        .row
+          .col-xs-4.col-sm-4.col-md-4
+            .product-bot-left
+              %a{ href: '#' } Back to Top
+          .col-xs-8.col-sm-8.col-md-8
+            #paginator

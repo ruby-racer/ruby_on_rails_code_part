@@ -1,0 +1,31 @@
+#unsubscribe-modal.modal.fade{ 'aria-labelledby': '', role: 'dialog', tabindex: '-1' }
+  .modal-dialog{ role: 'document' }
+    .modal-content
+      .modal-header
+        %button.close{ 'aria-label': 'Close', type: 'button', data: { dismiss: 'modal'} }
+          %span{ 'aria-hidden': true }
+            %img{ src: asset_path('cross.png') }
+        %h4.modal-title.text-center
+          = t('views.messaging.modals.unsubscribe_modal.title')
+      .modal-body
+        .col-xs-12.col-md-12.col-sm-12
+          = form_for Unsubscribe.new, remote: true, html: { class: 'form-horizontal' } do |f|
+            = f.hidden_field :account_id, value: current_account.try(:id) || current_user.account_ids
+            .alert.alert-info
+              = t('views.messaging.modals.unsubscribe_modal.info')
+            .form-group.input-box
+              %label
+                = t('views.messaging.modals.unsubscribe_modal.labels.email')
+              = f.text_field :email, class: 'form-control', autocomplete: 'off', placeholder: t('views.messaging.modals.unsubscribe_modal.placeholders.email'), data: { 'parsley-type': 'email' }, required: ''
+            .row
+              .col-sm-6.col-sm-offset-3.text-center
+                %h5{ style: 'color: #999; opacity: 1;' } - OR -
+            .form-group.input-box
+              %label
+                = t('views.messaging.modals.unsubscribe_modal.labels.order_id')
+              = text_field_tag :order_id, nil, placeholder: t('views.messaging.modals.unsubscribe_modal.placeholders.order_id'), class: 'form-control',  autocomplete: 'off', required: ''
+      .modal-footer
+        %button#unsubscribe-submit.btn.btn-green{ type: 'button' }
+          %span
+            #{t('views.messaging.buttons.add')}
+= javascript_include_tag 'unsubscribe'

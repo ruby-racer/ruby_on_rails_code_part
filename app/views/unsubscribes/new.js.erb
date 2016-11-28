@@ -1,0 +1,9 @@
+NProgress.done()
+$('#unsubscribe-modal').replaceWith('<%= j render(partial: 'new_modal') %>');
+
+$('#unsubscribe-modal').modal({
+  keyboard: false,
+  backdrop: 'static'
+})
+$('#unsubscribe-modal').modal('show')
+$('div.alert.alert-danger').remove()
